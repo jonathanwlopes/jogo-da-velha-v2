@@ -3,6 +3,7 @@ import { Players } from "./Players"
 import { StartGame } from "./StartGame"
 import * as S from "./styles"
 import { HistoryMatch } from "./HistoryMatch"
+import { ResetGame } from "./ResetGame"
 
 export const LeftPanel = () => {
   return (
@@ -12,6 +13,7 @@ export const LeftPanel = () => {
         <TypeMatch />
         <StartGame />
         <HistoryMatch />
+        <ResetGame />
       </S.Content>
     </S.Container>
   )
