@@ -1,6 +1,7 @@
 import * as S from "./style"
 
 export const Players = () => {
+
   return (
     <S.Container>
 

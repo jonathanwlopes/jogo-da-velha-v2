@@ -25,7 +25,7 @@ export const Play = styled.div`
   cursor: pointer;
   box-shadow: 0px 0px 0px #00000029;
   transition: all 0.15s linear;
-
+  min-height: 11rem;
   &:hover {
     box-shadow: 0px 3px 6px #000000;
   }

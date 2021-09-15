@@ -1,18 +1,17 @@
+import { useBattlefield } from "../../../context/BattlefieldContext"
 import * as S from "./styles"
 
 export const Battlefield = () => {
+  const { scenery, handleClickPlay } = useBattlefield()
+
   return (
     <S.Container>
       <S.Content>
-        <S.Play>X</S.Play>
-        <S.Play>X</S.Play>
-        <S.Play>X</S.Play>
-        <S.Play>O</S.Play>
-        <S.Play>X</S.Play>
-        <S.Play></S.Play>
-        <S.Play>X</S.Play>
-        <S.Play>X</S.Play>
-        <S.Play>X</S.Play>
+        {scenery.map((play, position) => (
+          <S.Play key={`position-${position}`} onClick={() => handleClickPlay(position)}>
+            {play}
+          </S.Play>
+        ))}
       </S.Content>
     </S.Container>
   )
