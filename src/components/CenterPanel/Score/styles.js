@@ -22,6 +22,7 @@ export const WrapperBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 40%;
 `
 
 export const Title = styled.span`

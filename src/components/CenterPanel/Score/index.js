@@ -1,14 +1,18 @@
+import { useBattlefield } from "../../../context/BattlefieldContext"
+import { useGame } from "../../../context/GameContext"
 import * as S from "./styles"
 
 export const Score = () => {
+  const { namePlayer, points } = useGame()
+  const { move } = useBattlefield()
   return (
     <S.Container>
-      <S.ScorePlayer>01</S.ScorePlayer>
+      <S.ScorePlayer>{points.player1}</S.ScorePlayer>
       <S.WrapperBox>
         <S.Title>Placar</S.Title>
-        <S.Player>Nome do Jogador</S.Player>
+        <S.Player>{move === "X" ? namePlayer.player1 : namePlayer.player2}</S.Player>
       </S.WrapperBox>
-      <S.ScorePlayer>02</S.ScorePlayer>
+      <S.ScorePlayer>{points.player2}</S.ScorePlayer>
     </S.Container>
   )
 }

@@ -7,7 +7,7 @@ export const Container = styled.div`
 
 export const Button = styled.button`
   width: 100%;
-  background: #45f39166;
+  background: ${(props) => (props.disabled ? "#f2f2f266" : "#45f39166")};
   border: none;
   border-radius: 15px;
   color: #f2f2f2;

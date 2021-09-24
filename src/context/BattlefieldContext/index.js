@@ -7,8 +7,8 @@ export const BattlefieldProvider = ({ children }) => {
   const INITIAL_SCENERY = ["", "", "", "", "", "", "", "", ""]
   const [scenery, setScenery] = useState(INITIAL_SCENERY)
   const [move, setMove] = useState("X")
-  const { winner, setWinner } = useGame()
-
+  const { winner, setWinner, setPoints, points, startGame } = useGame()
+  const [plays, setPlays] = useState([])
 
   const isFull = (newScenery) => {
     const hasEmpty = newScenery.some((field) => !field)
@@ -27,10 +27,11 @@ export const BattlefieldProvider = ({ children }) => {
 
   const resetBattlefield = () => {
     setScenery(INITIAL_SCENERY)
+    setWinner("")
+    setPlays([])
   }
 
   const verifyWinner = (newScenery) => {
-
     const winningPositions = [
       [0, 1, 2],
       [3, 4, 5],
@@ -45,11 +46,13 @@ export const BattlefieldProvider = ({ children }) => {
     winningPositions.forEach((winnerPosition) => {
       if (newScenery[winnerPosition[0]] === "X" && newScenery[winnerPosition[1]] === "X" && newScenery[winnerPosition[2]] === "X") {
         setWinner("X")
+        setPoints({ ...points, player1: points.player2 + 1 })
         setTimeout(resetBattlefield, 500)
       }
 
       if (newScenery[winnerPosition[0]] === "O" && newScenery[winnerPosition[1]] === "O" && newScenery[winnerPosition[2]] === "O") {
         setWinner("O")
+        setPoints({ ...points, player2: points.player2 + 1 })
         setTimeout(resetBattlefield, 500)
       }
     })
@@ -62,13 +65,19 @@ export const BattlefieldProvider = ({ children }) => {
   const handleClickPlay = (position) => {
     const newScenery = [...scenery]
     if (newScenery[position] !== "") return
+    if (!startGame) return
     newScenery[position] = move
     setScenery(newScenery)
     verifyWinner(newScenery)
+    setPlays([...plays, { movePlay: move }])
     toggleMove()
   }
 
-  return <BattlefieldContext.Provider value={{ scenery, setScenery, move, setMove, handleClickPlay }}>{children}</BattlefieldContext.Provider>
+  return (
+    <BattlefieldContext.Provider value={{ scenery, setScenery, move, setMove, handleClickPlay, plays, setPlays }}>
+      {children}
+    </BattlefieldContext.Provider>
+  )
 }
 
 export const useBattlefield = () => {
