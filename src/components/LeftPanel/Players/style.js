@@ -33,8 +33,10 @@ export const ToggleOption = styled.div`
   background: #0097e6;
   border-radius: 50px;
   margin-right: 5px;
-  border: 1px solid #FFFFFF;
+  border: 1px solid #ffffff;
   padding: 5px;
+  pointer-events: ${(props) => (props.disabled ? "none" : "")};
+  cursor: pointer;
 
   &:after {
     content: "";
@@ -42,8 +44,9 @@ export const ToggleOption = styled.div`
     height: 18px;
     border-radius: 50px;
     background: #ffffff;
-    cursor: pointer;
     display: inline-block;
     box-shadow: 0px 3px 6px #00000029;
+    margin-left: ${(props) => (props.isBot ? "50px" : "")};
+    transition: all 0.3s linear;
   }
 `

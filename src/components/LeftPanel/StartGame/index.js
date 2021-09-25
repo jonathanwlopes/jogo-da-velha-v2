@@ -4,9 +4,15 @@ import * as S from "./styles"
 export const StartGame = () => {
   const { setStartGame, startGame } = useGame()
 
+  const handleStartGame = () => {
+    setStartGame(true)
+  }
+
   return (
     <S.Container>
-      <S.Button disabled={startGame} onClick={() => setStartGame(true)}>Jogar</S.Button>
+      <S.Button disabled={startGame} onClick={handleStartGame}>
+        Jogar
+      </S.Button>
     </S.Container>
   )
 }

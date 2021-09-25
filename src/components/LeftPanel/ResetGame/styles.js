@@ -13,11 +13,11 @@ export const Button = styled.button`
   cursor: pointer;
   color: #0097e6;
   font-size: 20px;
-  background: #ffffff;
+  background: ${(props) => (props.disabled ? "#F0FFFF" : " #ffffff")};
 
-  transition: all .1ms linear;
+  transition: all 0.1ms linear;
 
   &:hover {
-    box-shadow: 0px 3px 6px #cd5c5c;
+    box-shadow: ${(props) => (props.disabled ? "" : "0px 3px 6px #cd5c5c")};
   }
 `
