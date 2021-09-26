@@ -1,9 +1,9 @@
-import { useBattlefield } from "../../../context/BattlefieldContext"
+import { useGame } from "../../../context/GameContext"
 
 import * as S from "./styles"
 
 export const HistoryMatch = () => {
-  const { sceneryWinner } = useBattlefield()
+  const { sceneryWinner } = useGame()
 
   return (
     <S.Container>

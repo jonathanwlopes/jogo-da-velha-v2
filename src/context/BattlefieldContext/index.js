@@ -7,9 +7,8 @@ export const BattlefieldProvider = ({ children }) => {
   const INITIAL_SCENERY = ["", "", "", "", "", "", "", "", ""]
   const [scenery, setScenery] = useState(INITIAL_SCENERY)
   const [move, setMove] = useState("X")
-  const { winner, setWinner, setPoints, points, startGame } = useGame()
+  const { winner, setWinner, setPoints, points, startGame, sceneryWinner, setSceneryWinner } = useGame()
   const [plays, setPlays] = useState([])
-  const [sceneryWinner, setSceneryWinner] = useState([])
   const { namePlayer } = useGame()
 
   const isFull = (newScenery) => {
@@ -75,12 +74,12 @@ export const BattlefieldProvider = ({ children }) => {
     newScenery[position] = move
     setScenery(newScenery)
     verifyWinner(newScenery)
-    setPlays([...plays, { movePlay: move }])
+    setPlays([...plays, { movePlay: move, movePosition: position, sceneryBack: newScenery }])
     toggleMove()
   }
 
   return (
-    <BattlefieldContext.Provider value={{ scenery, setScenery, move, setMove, handleClickPlay, plays, setPlays, sceneryWinner, setSceneryWinner }}>
+    <BattlefieldContext.Provider value={{ scenery, setScenery, move, setMove, handleClickPlay, plays, setPlays, sceneryWinner, setSceneryWinner, resetBattlefield }}>
       {children}
     </BattlefieldContext.Provider>
   )

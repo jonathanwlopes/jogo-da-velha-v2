@@ -1,5 +1,4 @@
 import { createContext, useCallback, useContext, useEffect, useState } from "react"
-import { useBattlefield } from "../BattlefieldContext"
 
 const GameContext = createContext({})
 
@@ -10,9 +9,15 @@ export const GameContextProvider = ({ children }) => {
   const [startGame, setStartGame] = useState(false)
   const [isBot, setIsBot] = useState(false)
   const [bestOf, setBestOf] = useState(false)
-  const { setSceneryWinner } = useBattlefield()
+  const [sceneryWinner, setSceneryWinner] = useState([])
 
-  const handleReset = useCallback(() => {
+  const resetGame = () => {
+    setStartGame(false)
+    setPoints({ player1: 0, player2: 0 })
+    setSceneryWinner([])
+  }
+
+  const handleResetListener = useCallback(() => {
     setStartGame(false)
     setPoints({ player1: 0, player2: 0 })
     setSceneryWinner([])
@@ -20,9 +25,9 @@ export const GameContextProvider = ({ children }) => {
 
   useEffect(() => {
     const { player1, player2 } = points
-    if (!bestOf && (player1 === 3 || player2 === 3)) handleReset()
-    if (bestOf && (player1 === 5 || player2 === 5)) handleReset()
-  }, [handleReset, points, bestOf])
+    if (!bestOf && (player1 === 3 || player2 === 3)) handleResetListener()
+    if (bestOf && (player1 === 5 || player2 === 5)) handleResetListener()
+  }, [handleResetListener, points, bestOf])
 
   return (
     <GameContext.Provider
@@ -39,7 +44,9 @@ export const GameContextProvider = ({ children }) => {
         setIsBot,
         bestOf,
         setBestOf,
-        handleReset,
+        sceneryWinner,
+        setSceneryWinner,
+        resetGame
       }}
     >
       {children}

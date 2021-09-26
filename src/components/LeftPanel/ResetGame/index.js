@@ -1,8 +1,15 @@
+import { useBattlefield } from "../../../context/BattlefieldContext"
 import { useGame } from "../../../context/GameContext"
 import * as S from "./styles"
 
 export const ResetGame = () => {
-  const { startGame, handleReset } = useGame()
+  const { startGame, resetGame } = useGame()
+  const { resetBattlefield } = useBattlefield()
+
+  const handleReset = () => {
+    resetBattlefield()
+    resetGame()
+  }
 
   return (
     <S.Container>
