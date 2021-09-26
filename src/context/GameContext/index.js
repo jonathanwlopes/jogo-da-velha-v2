@@ -5,7 +5,7 @@ const GameContext = createContext({})
 export const GameContextProvider = ({ children }) => {
   const [winner, setWinner] = useState("")
   const [points, setPoints] = useState({ player1: 0, player2: 0 })
-  const [namePlayer, setNamePlayer] = useState({ player1: "Jonathan", player2: "Raul" })
+  const [namePlayer, setNamePlayer] = useState({ player1: "Jonathan", player2: "Raul", bot: "BOT" })
   const [startGame, setStartGame] = useState(false)
   const [isBot, setIsBot] = useState(false)
   const [bestOf, setBestOf] = useState(false)
@@ -46,7 +46,7 @@ export const GameContextProvider = ({ children }) => {
         setBestOf,
         sceneryWinner,
         setSceneryWinner,
-        resetGame
+        resetGame,
       }}
     >
       {children}

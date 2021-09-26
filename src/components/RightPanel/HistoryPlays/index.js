@@ -6,9 +6,9 @@ export const HistoryPlays = () => {
   const titleSequence = ["Primeiro", "Segundo", "Terceiro", "Quarto", "Quinto", "Sexto", "Setimo", "Oitavo", "Nono"]
 
   const { plays, setScenery } = useBattlefield()
-  const { namePlayer } = useGame()
+  const { namePlayer, isBot } = useGame()
 
-  const { player1, player2 } = namePlayer
+  const { player1, player2, bot } = namePlayer
 
   const handleBackPlays = (position) => {
     setScenery(plays[position].sceneryBack)
@@ -22,7 +22,7 @@ export const HistoryPlays = () => {
           <S.WrapperBox key={`play-${position}`} onClick={() => handleBackPlays(position)}>
             <S.Play>{play.movePlay}</S.Play>
             <S.WrapperPlayer>
-              <S.Player>{play.movePlay === "X" ? player1 : player2}</S.Player>
+              <S.Player>{play.movePlay === "X" ? player1 : !isBot ? player2 : bot}</S.Player>
               <S.SquarePlay>{`${titleSequence[play.movePosition]} quadrado`}</S.SquarePlay>
             </S.WrapperPlayer>
           </S.WrapperBox>
